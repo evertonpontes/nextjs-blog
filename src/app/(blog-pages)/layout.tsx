@@ -7,10 +7,12 @@ export default function BlogLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="bg-background relative min-h-svh flex flex-col">
+    <div
+      className="bg-background relative min-h-svh flex flex-col"
+      suppressHydrationWarning
+    >
       <Navbar />
       {children}
-      <Footer />
     </div>
   );
 }

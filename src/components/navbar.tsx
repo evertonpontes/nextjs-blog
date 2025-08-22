@@ -1,7 +1,6 @@
 "use client";
 
 import { useId } from "react";
-import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -9,7 +8,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Input } from "@/components/ui/input";
-import { BotMessageSquare, Menu, Search, Terminal } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -35,7 +34,7 @@ export function Navbar() {
     <header className="bg-background sticky top-0 z-50 w-full border-b px-4 md:px-6">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
-        <div className="flex flex-1 items-center gap-6">
+        <div className="flex items-center gap-6">
           {/* Mobile trigger */}
           <Sheet>
             <SheetTrigger asChild>
@@ -59,7 +58,10 @@ export function Navbar() {
                   <NavigationMenuList className="flex-col items-start gap-2">
                     {navigationLinks.map((link, index) => (
                       <NavigationMenuItem key={index} className="w-full">
-                        <NavigationMenuLink href={link.href} className="py-1.5">
+                        <NavigationMenuLink
+                          href={link.href}
+                          className="text-accent-foreground py-1.5 font-serif text-base"
+                        >
                           {link.label}
                         </NavigationMenuLink>
                       </NavigationMenuItem>
@@ -69,37 +71,33 @@ export function Navbar() {
               </div>
             </SheetContent>
           </Sheet>
-          <Link href="/">
-            <div className="bg-primary text-primary-foreground p-1 rounded-sm">
-              <Terminal />
-            </div>
-          </Link>
           {/* Navigation links */}
           <NavigationMenu className="max-md:hidden">
             <NavigationMenuList className="gap-2">
               {navigationLinks.map((link, index) => (
-                <NavigationMenuItem key={index}>
+                <NavigationMenuItem key={index} className="relative group/link">
                   <NavigationMenuLink
                     href={link.href}
-                    className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                    className="text-accent-foreground py-1.5 font-medium font-serif text-base"
                   >
                     {link.label}
                   </NavigationMenuLink>
+                  <div className="absolute h-px bg-primary bottom-1.5 w-0 group-hover/link:w-full transition-[width] ease-in-out duration-300" />
                 </NavigationMenuItem>
               ))}
             </NavigationMenuList>
           </NavigationMenu>
-          {/* Search form */}
-          <div className="relative">
-            <Input
-              id={id}
-              className="peer h-8 ps-8 pe-2"
-              placeholder="Search for posts..."
-              type="search"
-            />
-            <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-2 peer-disabled:opacity-50">
-              <Search size={16} />
-            </div>
+        </div>
+        {/* Search form */}
+        <div className="relative mx-auto">
+          <Input
+            id={id}
+            className="peer h-8 ps-8 pe-2"
+            placeholder="Search..."
+            type="search"
+          />
+          <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-2 peer-disabled:opacity-50">
+            <Search size={16} />
           </div>
         </div>
         {/* Right side */}

@@ -2,4 +2,8 @@
 
 import dynamic from "next/dynamic";
 
-export const components = {};
+export const components = {
+  blog_content: dynamic(() => import("./PostBody")),
+  hero: dynamic(() => import("./Hero")),
+  posts: dynamic(() => import("./Posts")),
+};

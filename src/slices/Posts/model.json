@@ -1,0 +1,84 @@
+{
+  "id": "posts",
+  "type": "SharedSlice",
+  "name": "Posts",
+  "description": "Posts",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading1"
+          }
+        },
+        "posts": {
+          "type": "Group",
+          "config": {
+            "label": "Posts",
+            "repeat": true,
+            "fields": {
+              "post": {
+                "type": "Link",
+                "config": {
+                  "label": "Post",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    {
+                      "id": "blog_post",
+                      "fields": [
+                        "title",
+                        "excerpt",
+                        "cover_image",
+                        {
+                          "id": "author",
+                          "customtypes": [
+                            {
+                              "id": "author",
+                              "fields": [
+                                "full_name",
+                                "avatar",
+                                "bio",
+                                "location",
+                                "joined",
+                                "contact"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "category",
+                          "customtypes": [
+                            {
+                              "id": "category",
+                              "fields": [
+                                "name"
+                              ]
+                            }
+                          ]
+                        },
+                        "reading_time",
+                        "published_date"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
