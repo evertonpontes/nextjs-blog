@@ -9,7 +9,7 @@ export default async function Posts() {
   return (
     <section>
       <div className="space-y-8 px-6 my-8">
-        <h1 className="text-4xl font-bold">All Posts</h1>
+        <h1 className="font-serif text-4xl font-bold">All Posts</h1>
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4">
           {posts.map((post, index) => (
             <PostCard
@@ -23,9 +23,7 @@ export default async function Posts() {
                   ? (post.data?.author.data?.full_name as string)
                   : ""
               }
-              publishedDate={
-                new Date((post.data?.published_date as string) + " 01:00:00")
-              }
+              publishedDate={post.data?.published_date as string}
               uid={post.uid as string}
             />
           ))}

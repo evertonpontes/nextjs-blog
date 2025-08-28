@@ -1,7 +1,7 @@
 "use server";
 
 import { FC } from "react";
-import { asText, Content, isFilled, RichTextField } from "@prismicio/client";
+import { asText, Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { PostCard } from "@/components/post-card";
 
@@ -25,7 +25,9 @@ const Posts: FC<PostsProps> = ({ slice }) => {
     >
       <div className="w-full h-px bg-accent my-8" />
       <div className="space-y-8 px-6 mb-8">
-        <h1 className="text-4xl font-bold">{asText(slice.primary.title)}</h1>
+        <h1 className="font-serif text-4xl font-bold">
+          {asText(slice.primary.title)}
+        </h1>
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4">
           {slice.primary.posts.map(({ post }, index) => {
             if (isFilled.contentRelationship(post)) {
@@ -41,11 +43,7 @@ const Posts: FC<PostsProps> = ({ slice }) => {
                       ? (post.data?.author.data?.full_name as string)
                       : ""
                   }
-                  publishedDate={
-                    new Date(
-                      (post.data?.published_date as string) + " 01:00:00"
-                    )
-                  }
+                  publishedDate={post.data?.published_date as string}
                   uid={post.uid as string}
                 />
               );

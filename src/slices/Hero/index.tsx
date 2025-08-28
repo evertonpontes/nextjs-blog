@@ -34,7 +34,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         <div className="es-fullpage-hero__content-right">
           <div className="es-fullpage-hero__content__intro">
             {isFilled.keyText(slice.primary.eyebrowHeadline) && (
-              <p className="es-fullpage-hero__content__intro__eyebrow">
+              <p className="font-serif es-fullpage-hero__content__intro__eyebrow">
                 {slice.primary.eyebrowHeadline}
               </p>
             )}
@@ -44,7 +44,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
               </div>
             )}
             {isFilled.richText(slice.primary.description) && (
-              <div className="es-fullpage-hero__content__intro__description">
+              <div className="font-serif es-fullpage-hero__content__intro__description">
                 <PrismicRichText field={slice.primary.description} />
               </div>
             )}
