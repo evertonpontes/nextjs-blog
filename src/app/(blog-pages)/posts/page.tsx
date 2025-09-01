@@ -7,7 +7,7 @@ export default async function Posts() {
   const posts = await client.getAllByType("blog_post");
 
   return (
-    <section>
+    <div className="grow">
       <div className="space-y-8 px-6 my-8">
         <h1 className="font-serif text-4xl font-bold">All Posts</h1>
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4">
@@ -29,6 +29,6 @@ export default async function Posts() {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

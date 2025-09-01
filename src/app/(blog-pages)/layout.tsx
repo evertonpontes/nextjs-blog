@@ -13,6 +13,7 @@ export default function BlogLayout({
     >
       <Navbar />
       {children}
+      <Footer />
     </div>
   );
 }

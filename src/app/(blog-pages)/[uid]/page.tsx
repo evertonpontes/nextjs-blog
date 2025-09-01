@@ -1,3 +1,4 @@
+import { Comments } from "@/components/comments";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import { asText, isFilled } from "@prismicio/client";
@@ -67,6 +68,19 @@ export default async function Post({
           <div className="font-serif leading-relaxed md:text-lg">
             <SliceZone slices={post.data.slices} components={components} />
           </div>
+        </div>
+      </section>
+      <div className="px-4">
+        <div className="mx-auto w-full max-w-3xl">
+          <div className="w-full h-px bg-muted" />
+        </div>
+      </div>
+      <section className="px-4 py-8 md:px-6 md:py-10 lg:py-12">
+        <div className="mx-auto w-full max-w-3xl">
+          <h2 className="text-3xl font-semibold mt-12 first:mt-0 last:mb-0">
+            Share your thoughts
+          </h2>
+          <Comments id={post.id} uid={post.uid} />
         </div>
       </section>
     </main>
