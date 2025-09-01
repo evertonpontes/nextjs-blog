@@ -16,6 +16,11 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
+
 const formSchema = z.object({
   comment: z.string(),
   email: z.string(),
@@ -140,21 +145,24 @@ export function Comments({ id, uid, comments }: CommentsProps) {
         </Button>
       </form>
 
+      <div className="py-8 md:py-10 lg:py-12">
+        <div className="mx-auto w-full max-w-3xl">
+          <div className="w-full h-px bg-muted" />
+        </div>
+      </div>
+
       {comments.length > 0 && (
         <>
-          <h2 className="text-3xl font-semibold mt-12 first:mt-0 last:mb-0">
+          <h2 className="text-3xl font-semibold first:mt-0 last:mb-0">
             What people are saying
           </h2>
           {comments.map((comment, index) => (
-            <div className="p-6 border my-4" key={index}>
+            <div className="p-6 border-b my-4" key={index}>
               <header className="text-sm">
-                {`Posted by ${comment.nickname} on ${new Date(
-                  comment.created_at
-                ).toLocaleTimeString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}`}
+                <h3 className="text-lg font-semibold">{comment.nickname}</h3>
+                <span className="text-muted-foreground">
+                  {dayjs(comment.created_at).fromNow()}
+                </span>
               </header>
               <p className="mt-4">{comment.payload}</p>
             </div>

@@ -5,9 +5,15 @@ export async function POST(req: Request) {
   const formData = await req.formData();
   const payload = await formData.get("payload");
 
-  const { response_url, actions, user } = JSON.parse(
+  const { response_url, actions, user, token } = JSON.parse(
     typeof payload === "string" ? payload : ""
   );
+
+  if (token !== process.env.SLACK_VERIFICATION_TOKEN) {
+    return new NextResponse("You're not authorized!", {
+      status: 401,
+    });
+  }
 
   let res = "";
 

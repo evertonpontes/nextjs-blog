@@ -78,7 +78,7 @@ export default async function Post({
           </div>
         </div>
       </section>
-      <div className="px-4">
+      <div className="px-4 md:py-2 lg:py-4">
         <div className="mx-auto w-full max-w-3xl">
           <div className="w-full h-px bg-muted" />
         </div>
