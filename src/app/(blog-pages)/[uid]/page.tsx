@@ -88,11 +88,7 @@ export default async function Post({
           <h2 className="text-3xl font-semibold mt-12 first:mt-0 last:mb-0">
             Share your thoughts
           </h2>
-          <Comments
-            id={post.id}
-            uid={post.uid}
-            comments={comments.data ?? []}
-          />
+          <Comments id={post.id} uid={uid} comments={comments.data ?? []} />
         </div>
       </section>
     </main>

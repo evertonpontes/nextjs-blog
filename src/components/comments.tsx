@@ -139,6 +139,28 @@ export function Comments({ id, uid, comments }: CommentsProps) {
           {isPending ? "Loading..." : "Send comment"}
         </Button>
       </form>
+
+      {comments.length > 0 && (
+        <>
+          <h2 className="text-3xl font-semibold mt-12 first:mt-0 last:mb-0">
+            What people are saying
+          </h2>
+          {comments.map((comment, index) => (
+            <div className="p-6 border my-4" key={index}>
+              <header className="text-sm">
+                {`Posted by ${comment.nickname} on ${new Date(
+                  comment.created_at
+                ).toLocaleTimeString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}`}
+              </header>
+              <p className="mt-4">{comment.payload}</p>
+            </div>
+          ))}
+        </>
+      )}
     </Form>
   );
 }
