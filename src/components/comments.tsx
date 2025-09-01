@@ -1,10 +1,9 @@
 "use client";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -26,9 +25,18 @@ const formSchema = z.object({
 interface CommentsProps {
   id: string;
   uid: string;
+  comments: {
+    post_id: string;
+    nickname: string;
+    payload: string;
+    created_at: string;
+    id: string;
+    published: boolean;
+    email: string;
+  }[];
 }
 
-export function Comments({ id, uid }: CommentsProps) {
+export function Comments({ id, uid, comments }: CommentsProps) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -131,6 +139,28 @@ export function Comments({ id, uid }: CommentsProps) {
           {isPending ? "Loading..." : "Send comment"}
         </Button>
       </form>
+
+      {comments.length > 0 && (
+        <>
+          <h2 className="text-3xl font-semibold mt-12 first:mt-0 last:mb-0">
+            What people are saying
+          </h2>
+          {comments.map((comment, index) => (
+            <div className="p-6 border my-4" key={index}>
+              <header className="text-sm">
+                {`Posted by ${comment.nickname} on ${new Date(
+                  comment.created_at
+                ).toLocaleTimeString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}`}
+              </header>
+              <p className="mt-4">{comment.payload}</p>
+            </div>
+          ))}
+        </>
+      )}
     </Form>
   );
 }

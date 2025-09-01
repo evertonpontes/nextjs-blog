@@ -5,6 +5,7 @@ import { asText, isFilled } from "@prismicio/client";
 import { PrismicImage, SliceZone } from "@prismicio/react";
 import dayjs from "dayjs";
 import { CalendarFold, Clock, UserRoundPen } from "lucide-react";
+import { supabase } from "@/lib/supabase/server";
 
 export default async function Post({
   params,
@@ -16,6 +17,13 @@ export default async function Post({
   const client = createClient();
   const post = await client.getByUID("blog_post", uid);
   const publishedDate = post.data.published_date as string;
+
+  const comments = await supabase
+    .from("comments")
+    .select("post_id, nickname, payload, created_at, id, published, email")
+    .eq("post_id", post.id)
+    .eq("published", true)
+    .order("created_at", { ascending: true });
 
   return (
     <main>
@@ -80,7 +88,11 @@ export default async function Post({
           <h2 className="text-3xl font-semibold mt-12 first:mt-0 last:mb-0">
             Share your thoughts
           </h2>
-          <Comments id={post.id} uid={post.uid} />
+          <Comments
+            id={post.id}
+            uid={post.uid}
+            comments={comments.data ?? []}
+          />
         </div>
       </section>
     </main>

@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   const body = await req.json();
 
-  const { post_id, email, comment, nickname, uid } = body;
+  const { post_id, email, comment, nickname } = body;
 
   const { data, error } = await supabase
     .from("comments")
