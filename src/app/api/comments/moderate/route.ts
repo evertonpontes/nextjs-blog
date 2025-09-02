@@ -5,15 +5,9 @@ export async function POST(req: Request) {
   const formData = await req.formData();
   const payload = await formData.get("payload");
 
-  console.log("Testing==============================");
-
-  console.log(process.env.SLACK_VERIFICATION_TOKEN);
-
   const { response_url, actions, user, token } = JSON.parse(
     typeof payload === "string" ? payload : ""
   );
-
-  console.log("Testing==============================");
 
   console.log(token);
 

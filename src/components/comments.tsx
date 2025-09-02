@@ -156,7 +156,7 @@ export function Comments({ id, uid, comments }: CommentsProps) {
             What people are saying
           </h2>
           {comments.map((comment, index) => (
-            <div className="p-6 border-b my-4" key={index}>
+            <div className="p-6 border-b last:border-b-0 my-4" key={index}>
               <header className="text-sm">
                 <h3 className="text-lg font-semibold">{comment.nickname}</h3>
                 <span className="text-muted-foreground">
