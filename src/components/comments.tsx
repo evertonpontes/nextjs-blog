@@ -145,14 +145,13 @@ export function Comments({ id, uid, comments }: CommentsProps) {
         </Button>
       </form>
 
-      <div className="py-8 md:py-10 lg:py-12">
-        <div className="mx-auto w-full max-w-3xl">
-          <div className="w-full h-px bg-muted" />
-        </div>
-      </div>
-
       {comments.length > 0 && (
         <>
+          <div className="py-8 md:py-10 lg:py-12">
+            <div className="mx-auto w-full max-w-3xl">
+              <div className="w-full h-px bg-muted" />
+            </div>
+          </div>
           <h2 className="text-3xl font-semibold first:mt-0 last:mb-0">
             What people are saying
           </h2>
