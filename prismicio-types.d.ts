@@ -453,11 +453,11 @@ export type AllDocumentTypes =
   | HomeDocument;
 
 /**
- * Primary content in *PostBody → Default → Primary*
+ * Primary content in *Post → Default → Primary*
  */
 export interface BlogContentSliceDefaultPrimary {
   /**
-   * Content field in *PostBody → Default → Primary*
+   * Content field in *Post → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -468,7 +468,7 @@ export interface BlogContentSliceDefaultPrimary {
 }
 
 /**
- * Default variation for PostBody Slice
+ * Default variation for Post Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -481,12 +481,12 @@ export type BlogContentSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Slice variation for *PostBody*
+ * Slice variation for *Post*
  */
 type BlogContentSliceVariation = BlogContentSliceDefault;
 
 /**
- * PostBody Shared Slice
+ * Post Shared Slice
  *
  * - **API ID**: `blog_content`
  * - **Description**: BlogContent

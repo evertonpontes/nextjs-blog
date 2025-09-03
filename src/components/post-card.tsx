@@ -27,7 +27,7 @@ export function PostCard({
 }: PostCardProps) {
   return (
     <Link
-      href={`/${uid}`}
+      href={`/posts/${uid}`}
       className="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-muted rounded-md overflow-hidden shadow-2xl hover:shadow-xl transition-all duration-300 ease-in-out border border-white/10 hover:border-white/30"
     >
       <div className="relative aspect-video">

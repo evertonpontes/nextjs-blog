@@ -6,6 +6,7 @@ import { PrismicImage, SliceZone } from "@prismicio/react";
 import dayjs from "dayjs";
 import { CalendarFold, Clock, UserRoundPen } from "lucide-react";
 import { supabase } from "@/lib/supabase/server";
+import { Toc } from "@/components/toc";
 
 export default async function Post({
   params,
@@ -29,7 +30,7 @@ export default async function Post({
     <main>
       <div className="px-4 py-8 md:px-6 md:py-10 lg:py-12">
         <div className="mx-auto w-full max-w-3xl">
-          <h1 className="font-serif mb-3 text-3xl font-semibold tracking-tighter md:text-4xl">
+          <h1 className="font-serif mb-3 text-3xl font-semibold tracking-tighter md:text-4xl scroll-mt-12">
             {asText(post.data.title)}
           </h1>
           <div className="md:flex items-center gap-8 not-md:space-y-4">
@@ -63,21 +64,16 @@ export default async function Post({
           </p>
         </div>
       </section>
+      <Toc slices={post.data.slices} title={post.data.title} />
       <section className="px-4 py-8 md:px-6 md:py-10 lg:py-12">
-        <div className="mx-auto w-full max-w-6xl">
+        <div className="mx-auto w-full max-w-3xl">
           <PrismicImage
             field={post.data.cover_image}
             className="aspect-video"
           />
         </div>
       </section>
-      <section className="px-4 py-8 md:px-6 md:py-10 lg:py-12">
-        <div className="mx-auto w-full max-w-3xl">
-          <div className="font-serif leading-relaxed md:text-lg">
-            <SliceZone slices={post.data.slices} components={components} />
-          </div>
-        </div>
-      </section>
+      <SliceZone slices={post.data.slices} components={components} />
       <div className="px-4 md:py-2 lg:py-4">
         <div className="mx-auto w-full max-w-3xl">
           <div className="w-full h-px bg-muted" />

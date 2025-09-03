@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     });
   }
 
-  await fetch(process.env.INCOMING_WEBHOOK_URL || "", {
+  await fetch(process.env.SLACK_INCOMING_WEBHOOK_URL || "", {
     method: "POST",
     body: JSON.stringify({
       blocks: [
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
           fields: [
             {
               type: "mrkdwn",
-              text: `*Blog post:*\nhttp://localhost:3000/${uid}`,
+              text: `*Blog post:*\nhttps://everton-blog.vercel.app/posts/${uid}`,
             },
             {
               type: "mrkdwn",

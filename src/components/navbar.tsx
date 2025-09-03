@@ -31,7 +31,7 @@ export function Navbar() {
   const id = useId();
 
   return (
-    <header className="bg-background sticky top-0 z-50 w-full border-b px-4 md:px-6">
+    <header className="bg-background z-50 w-full border-b px-4 md:px-6">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-6">
