@@ -14,10 +14,6 @@ export type PostsProps = SliceComponentProps<Content.PostsSlice>;
  * Component for "Posts" Slices.
  */
 const Posts: FC<PostsProps> = ({ slice }) => {
-  if (isFilled.contentRelationship(slice.primary.posts?.[0]?.post)) {
-    console.log(slice.primary.posts?.[0]?.post.data);
-  }
-
   return (
     <section
       data-slice-type={slice.slice_type}

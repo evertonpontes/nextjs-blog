@@ -7,8 +7,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { Input } from "@/components/ui/input";
-import { Menu, Search } from "lucide-react";
+import { Menu } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +18,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Search } from "@/components/search";
 
 const navigationLinks = [
   { href: "/", label: "Home" },
@@ -89,16 +89,8 @@ export function Navbar() {
           </NavigationMenu>
         </div>
         {/* Search form */}
-        <div className="relative mx-auto">
-          <Input
-            id={id}
-            className="peer h-8 ps-8 pe-2"
-            placeholder="Search..."
-            type="search"
-          />
-          <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-2 peer-disabled:opacity-50">
-            <Search size={16} />
-          </div>
+        <div className="w-full max-w-lg grow">
+          <Search />
         </div>
         {/* Right side */}
         <div>
