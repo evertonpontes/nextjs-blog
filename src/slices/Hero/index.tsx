@@ -27,6 +27,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             <PrismicNextImage
               field={slice.primary.image}
               className="es-fullpage-hero__image"
+              priority
             />
           )}
         </div>

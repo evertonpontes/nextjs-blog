@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 
 interface SearchBoxProps {
-  refine: (value: string) => void;
+  refine: (value: string) => unknown;
 }
 
 function SearchBox({ refine }: SearchBoxProps) {

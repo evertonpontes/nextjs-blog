@@ -1,6 +1,5 @@
 "use client";
 
-import { useId } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -28,8 +27,6 @@ const navigationLinks = [
 ];
 
 export function Navbar() {
-  const id = useId();
-
   return (
     <header className="bg-background z-50 w-full border-b px-4 md:px-6">
       <div className="flex h-16 items-center justify-between gap-4">
