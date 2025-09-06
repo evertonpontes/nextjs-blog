@@ -29,6 +29,7 @@ const Info: FC<InfoProps> = ({ slice }) => {
           {asText(slice.primary.excerpt)}
         </p>
       </div>
+      <div className="w-full mx-auto max-w-3xl h-px bg-accent my-8" />
       <section className="px-4 py-8 md:px-6 md:py-10 lg:py-12">
         <div className="mx-auto w-full max-w-3xl font-serif">
           <RichText field={slice.primary.content} />
