@@ -44,7 +44,9 @@ export const richTextComponents: JSXMapSerializer = {
       {children}
     </Heading>
   ),
-  paragraph: ({ children }) => <p className="mb-7 last:mb-0">{children}</p>,
+  paragraph: ({ children }) => (
+    <p className="mb-7 last:mb-0 text-base leading-relaxed">{children}</p>
+  ),
   oList: ({ children }) => (
     <ol className="mb-7 pl-4 last:mb-0 md:pl-6">{children}</ol>
   ),

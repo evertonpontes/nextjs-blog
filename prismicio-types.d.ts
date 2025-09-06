@@ -69,6 +69,67 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
+type AboutDocumentDataSlicesSlice = InfoSlice;
+
+/**
+ * Content for About documents
+ */
+interface AboutDocumentData {
+  /**
+   * Slice Zone field in *About*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<AboutDocumentDataSlicesSlice> /**
+   * Meta Title field in *About*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: about.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *About*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: about.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *About*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * About document from Prismic
+ *
+ * - **API ID**: `about`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AboutDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<Simplify<AboutDocumentData>, "about", Lang>;
+
 /**
  * Item in *Author → Social Links*
  */
@@ -447,6 +508,7 @@ export type HomeDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<HomeDocumentData>, "home", Lang>;
 
 export type AllDocumentTypes =
+  | AboutDocument
   | AuthorDocument
   | BlogPostDocument
   | CategoryDocument
@@ -660,6 +722,166 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceImageRight;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
+ * Item in *Info → Default → Primary → Social Links*
+ */
+export interface InfoSliceDefaultPrimarySocialButtonsItem {
+  /**
+   * Social Image field in *Info → Default → Primary → Social Links*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info.default.primary.social_buttons[].social_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  social_image: prismic.ImageField<never>;
+
+  /**
+   * Text field in *Info → Default → Primary → Social Links*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info.default.primary.social_buttons[].text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  text: prismic.KeyTextField;
+
+  /**
+   * Call To Action Link field in *Info → Default → Primary → Social Links*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info.default.primary.social_buttons[].call_to_action_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  call_to_action_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+}
+
+/**
+ * Item in *Info → Default → Primary → Skills*
+ */
+export interface InfoSliceDefaultPrimarySkillsItem {
+  /**
+   * Skill Icon field in *Info → Default → Primary → Skills*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info.default.primary.skills[].skill_icon
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  skill_icon: prismic.ImageField<never>;
+
+  /**
+   * Text field in *Info → Default → Primary → Skills*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info.default.primary.skills[].text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  text: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *Info → Default → Primary*
+ */
+export interface InfoSliceDefaultPrimary {
+  /**
+   * Title field in *Info → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * excerpt field in *Info → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info.default.primary.excerpt
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  excerpt: prismic.RichTextField;
+
+  /**
+   * Avatar field in *Info → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info.default.primary.avatar
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  avatar: prismic.ImageField<never>;
+
+  /**
+   * Social Links field in *Info → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info.default.primary.social_buttons[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  social_buttons: prismic.GroupField<
+    Simplify<InfoSliceDefaultPrimarySocialButtonsItem>
+  >;
+
+  /**
+   * Skills field in *Info → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info.default.primary.skills[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  skills: prismic.GroupField<Simplify<InfoSliceDefaultPrimarySkillsItem>>;
+
+  /**
+   * Content field in *Info → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Info Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type InfoSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<InfoSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Info*
+ */
+type InfoSliceVariation = InfoSliceDefault;
+
+/**
+ * Info Shared Slice
+ *
+ * - **API ID**: `info`
+ * - **Description**: Info
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type InfoSlice = prismic.SharedSlice<"info", InfoSliceVariation>;
+
+/**
  * Item in *Posts → Default → Primary → Posts*
  */
 export interface PostsSliceDefaultPrimaryPostsItem {
@@ -780,6 +1002,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AboutDocument,
+      AboutDocumentData,
+      AboutDocumentDataSlicesSlice,
       AuthorDocument,
       AuthorDocumentData,
       AuthorDocumentDataSocialLinksItem,
@@ -802,6 +1027,12 @@ declare module "@prismicio/client" {
       HeroSliceVariation,
       HeroSliceDefault,
       HeroSliceImageRight,
+      InfoSlice,
+      InfoSliceDefaultPrimarySocialButtonsItem,
+      InfoSliceDefaultPrimarySkillsItem,
+      InfoSliceDefaultPrimary,
+      InfoSliceVariation,
+      InfoSliceDefault,
       PostsSlice,
       PostsSliceDefaultPrimaryPostsItem,
       PostsSliceDefaultPrimary,
