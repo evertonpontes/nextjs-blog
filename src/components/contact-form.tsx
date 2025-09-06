@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useTransition } from "react";
 
 const formSchema = z.object({
   name: z.string().min(1).min(3).max(80),
@@ -23,24 +24,28 @@ const formSchema = z.object({
 });
 
 export function ContactForm() {
+  const [isPending, startTransition] = useTransition();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      body: JSON.stringify(values),
-      headers: { "Content-Type": "application/json" },
-    });
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    startTransition(async () => {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: { "Content-Type": "application/json" },
+      });
 
-    if (res.ok) {
-      console.log(values);
-      toast("Message sent successfully");
-    } else {
-      console.error("Form submission error");
-      toast.error("Failed to submit message. Please try again.");
-    }
+      if (res.ok) {
+        console.log(values);
+        toast("Message sent successfully");
+      } else {
+        console.error("Form submission error");
+        toast.error("Failed to submit message. Please try again.");
+      }
+    });
   }
 
   return (
@@ -110,8 +115,9 @@ export function ContactForm() {
         <Button
           type="submit"
           className="w-full md:w-auto text-base md:text-sm h-12 md:h-10"
+          disabled={isPending}
         >
-          Send message
+          {isPending ? "Sending..." : "SendSend message"}
         </Button>
       </form>
     </Form>

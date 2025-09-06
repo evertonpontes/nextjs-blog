@@ -48,9 +48,9 @@ export function Comments({ id, uid, comments }: CommentsProps) {
     resolver: zodResolver(formSchema),
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
-      await fetch(`/api/comments/submit`, {
+      const data = await fetch(`/api/comments/submit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,15 +60,17 @@ export function Comments({ id, uid, comments }: CommentsProps) {
           ...values,
           uid,
         }),
-      }).then(async (response) => {
-        const data = await response.json();
-        if (data.error) {
-          console.error(data.error);
-        } else {
-          toast.success("Comment submitted successfully!");
-          form.reset();
-        }
       });
+
+      if (data.ok) {
+        toast.success(
+          "Thank you for your comment! It has been submitted and is awaiting approval before appearing on the page."
+        );
+        form.reset();
+      } else {
+        console.error("Comment submission error");
+        toast.error("Failed to submit comment. Please try again.");
+      }
     });
   }
 
@@ -141,7 +143,7 @@ export function Comments({ id, uid, comments }: CommentsProps) {
           className="font-serif rounded-none cursor-pointer"
           disabled={isPending}
         >
-          {isPending ? "Loading..." : "Send comment"}
+          {isPending ? "Sending..." : "Send comment"}
         </Button>
       </form>
 
