@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     // Get all articles from Prismic
     const articles = await prismicClient.getAllByType("blog_post");
 
-    console.log(articles);
+    console.log(articles[1]);
 
     // Map articles to Algolia records
     const articleRecords = articles.map((post) => ({
