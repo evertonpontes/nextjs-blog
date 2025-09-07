@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { algoliasearch } from "algoliasearch";
 import { createClient } from "@/prismicio";
 import { asText, SliceZone } from "@prismicio/client";
