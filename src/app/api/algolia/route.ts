@@ -42,6 +42,8 @@ export async function POST(request: Request) {
       },
     });
 
+    console.log(articles[1]);
+
     // Map articles to Algolia records
     const articleRecords = articles.map((post) => ({
       objectID: post.id, // Unique identifier in algolia
